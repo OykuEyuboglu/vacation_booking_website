@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "DeleteFlight";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+@model List<BitirmeProjesi1.DTOS.FlightDTO>
+
+@await Html.PartialAsync("PartialMessagePopup")
+
+<h1 style="color:aliceblue">UÇUŞ SİLME PANELİ</h1>
+
+
+    <p style="color:aliceblue; margin-bottom:0px !important">Silmek istediğiniz uçuşu seçin:</p>
+    @await Html.PartialAsync("PartialFlightList")
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

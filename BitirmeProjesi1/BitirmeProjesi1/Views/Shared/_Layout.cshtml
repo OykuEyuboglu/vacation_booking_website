@@ -1,0 +1,149 @@
+﻿@using BitirmeProjesi1.DTOS
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BitirmeProjesi1</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="~/css/footer.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BitirmeProjesi1.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="/css/Layout.css">
+
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    @* Login gerekli js kodlar => site.js *@
+
+
+    <div class="allHead">
+        <header class="headerPart">
+
+            <h1 class="logo-container ">
+                RotaTatil
+                <img src="~/images/sun (2).png" alt="Logo" class="animated-logo">
+            </h1>
+
+            <nav class="navigation">
+                <a asp-controller="Account" asp-action="Login" class="navigation-item" id="goMain">Anasayfa</a>
+                <a asp-controller="Account" asp-action="Companies" class="navigation-item">Kampanyalar</a>
+                <a asp-controller="Hotel" asp-action="Index" class="navigation-item">Otel</a>
+                <a asp-controller="Flight" asp-action="Index" class="navigation-item">Uçuşlar</a>
+
+
+                @if (User.Identity.IsAuthenticated) // Eğer kullanıcı giriş yapmışsa
+                {
+                    <form asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
+                        <button type="submit" class="btn btnLogout-size btn-outline-danger">Çıkış Yap</button>
+                    </form>
+                }
+                else // Giriş yapmamışsa
+                {
+                    <button class="btnLogin-popup btnLogout-size">Giriş Yap</button>
+                }
+            </nav>
+        </header>
+
+        <div class="formAll">
+
+            <span class="icon-close"><ion-icon name="close-outline"></ion-icon></span>
+
+            <div class="form-box login-reg">
+
+
+                <h2 class="formName">Giriş Yap</h2>
+                <div class="form-container">
+                    @await Html.PartialAsync("PartialLogin", new LoginDTO())
+                </div>
+            </div>
+
+
+            <div class="form-box login-Reg register">
+
+                <h2 class="formName">Üye Ol</h2>
+                @await Html.PartialAsync("PartialRegister", new RegisterDTO())
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    @if (ViewBag.HideFooter == null || ViewBag.HideFooter == false)
+    {
+        <footer>
+            <div class="social">
+                <p class="p_footer">RotaTatili takip etmeyi unutma!!</p>
+                <ul class="wrapperF">
+
+
+                    <a href="https://www.linkedin.com/" target="_blank">
+                    <li class="icon linkedin">
+                        <span class="tooltip">LinkedIn</span>
+                        <span><i class="fab fa-linkedin"></i></span>
+                    </li>
+                    </a>
+
+                    <a href="https://github.com/" target="_blank">
+                    <li class="icon github">
+                        <span class="tooltip">GitHub</span>
+                        <span><i class="fab fa-github"></i></span>
+                    </li>
+                    </a>
+
+                    <a href="https://www.facebook.com/" target="_blank">
+                    <li class="icon facebook">
+                        <span class="tooltip">Facebook</span>
+                        <span><i class="fab fa-facebook-f"></i></span>
+                    </li>
+                    </a>
+
+                    <a href="https://www.instagram.com/" target="_blank">
+                    <li class="icon instagram">
+                        <span class="tooltip">Instagram</span>
+                        <span><i class="fab fa-instagram"></i></span>
+                    </li>
+                    </a>
+
+                    <a href="https://x.com/?lang=tr" target="_blank">
+                    <li class="icon twitter">
+                        <span class="tooltip">Twitter</span>
+                        <span><i class="fab fa-twitter"></i></span>
+                    </li>
+                    </a>
+                </ul>
+            </div>
+            <div class="final_text"></div>
+            <p class="p_footer">
+                En güzel fırsatları kaçırma
+                <br>Bildirimleri aç ve eğlenceye başla!
+            </p>
+        </footer>
+    }
+
+
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+</body>
+</html>

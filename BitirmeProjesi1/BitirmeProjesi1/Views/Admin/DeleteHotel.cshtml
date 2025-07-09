@@ -1,0 +1,165 @@
+﻿@{
+    ViewData["Title"] = "DeleteHotel";
+}
+
+<link rel="stylesheet" href="~/css/Hotel.css" asp-append-version="true" />
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+@model List<BitirmeProjesi1.DTOS.HotelDTO>
+
+
+
+@await Html.PartialAsync("PartialMessagePopup")
+
+
+<br />
+@if (ViewBag.WhichPage == "DeleteHotelPage")
+{
+    <h1 style="color:aliceblue">OTEL SİLME PANELİ</h1>
+
+    <p style="color:aliceblue; margin-bottom:0px !important">Silmek istediğiniz Oteli seçin:</p>
+
+}
+else if (ViewBag.WhichPage == "UpdateHotelPage")
+{<br />
+    <br />
+
+    <h1 style="color:aliceblue">OTEL GÜNCELLEME PANELİ</h1>
+
+    <p style="color:aliceblue; margin-bottom:0px !important">Güncellemek istediğiniz Oteli seçin:</p>
+
+}
+else if (ViewBag.WhichPage == "FotoDeletePage")
+{
+    <h1 style="color:aliceblue">OTEL GÖRSELİ SİLME PANELİ</h1>
+
+    <p style="color:aliceblue; margin-bottom:0px !important">Fotoğraf silimi yapmak istediğiniz oteli seçin:</p>
+
+}
+else if (ViewBag.WhichPage == "RoomDeletePage")
+{
+    <h1 style="color:aliceblue">OTEL ODASI SİLME PANELİ</h1>
+
+    <p style="color:aliceblue; margin-bottom:0px !important">Oda silimi yapmak istediğiniz oteli seçin:</p>
+
+}
+else if (ViewBag.WhichPage == "RoomUpdatePage")
+{
+    <h1 style="color:aliceblue">OTEL ODASI GÜNCELLEME PANELİ</h1>
+
+    <p style="color:aliceblue; margin-bottom:0px !important">Oda güncelleme yapmak istediğiniz oteli seçin:</p>
+
+}
+
+
+
+@if (Model != null)
+{
+    @foreach (var hotel in Model)
+    {
+        <div class="wrapper">
+            <h1 alt="">@hotel.Name</h1>
+                <img class="image i1" src="@hotel.MainFotoURL" alt="Image of @hotel.Name">
+            
+            <div class="details">
+                <h1><em>@hotel.Description</em></h1>
+                <h2>@hotel.Location</h2>
+                <div>
+                    @hotel.Rating Yıldızlı <br />
+
+                    @for (int i = 0; i < hotel.Rating; i++)
+                    {
+                        <p style="display: inline; font-size:xx-large">★</p>
+                    }
+                </div>
+
+            </div>
+
+
+
+            @if (ViewBag.WhichPage == "DeleteHotelPage")
+            {
+                <form asp-controller="Admin" asp-action="DeleteHotel" method="post">
+                    <input type="hidden" name="id" value="@hotel.Id" />
+                    <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Sil</button>
+                </form>
+
+                <style>
+                    .flight-card__cta.button:hover {
+                        background-color: red;
+                        color: white;
+                    }
+                </style>
+
+            }
+            else if (ViewBag.WhichPage == "UpdateHotelPage")
+            {
+                <form asp-controller="Admin" asp-action="UpdateHotel" method="get">
+                    <input type="hidden" name="id" value="@hotel.Id" />
+                    <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Güncelle</button>
+                </form>
+
+                <style>
+                    .flight-card__cta.button:hover {
+                        background-color: cadetblue;
+                        color: white;
+                    }
+                </style>
+
+            }
+            else if (ViewBag.WhichPage == "FotoDeletePage")
+            {
+                <form asp-controller="Admin" asp-action="DeleteFoto" method="get">
+                    <input type="hidden" name="id" value="@hotel.Id" />
+                    <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Seç</button>
+                </form>
+
+                <style>
+                    .flight-card__cta.button:hover {
+                        background-color: darkred;
+                        color: white;
+                    }
+                </style>
+
+            }
+            else if (ViewBag.WhichPage == "RoomDeletePage")
+            {
+                <form asp-controller="Admin" asp-action="DeleteRoom" method="get">
+                    <input type="hidden" name="id" value="@hotel.Id" />
+                    <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Seç</button>
+                </form>
+
+                <style>
+                    .flight-card__cta.button:hover {
+                        background-color: darkred;
+                        color: white;
+                    }
+                </style>
+
+            }
+            else if (ViewBag.WhichPage == "RoomUpdatePage")
+            {
+                <form asp-controller="Admin" asp-action="UpdateRoom" method="get">
+                    <input type="hidden" name="id" value="@hotel.Id" />
+                    <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Seç</button>
+                </form>
+
+                <style>
+                    .flight-card__cta.button:hover {
+                        background-color: darkcyan !important;
+                        color: white;
+                    }
+                </style>
+
+            }
+        </div>
+
+    }
+
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

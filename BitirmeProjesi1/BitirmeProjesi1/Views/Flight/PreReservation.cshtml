@@ -1,0 +1,133 @@
+﻿@{
+    ViewData["Title"] = "PartialFlightList";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/AddFlight.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/bookFlight.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/BitirmeProjesi1.styles.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+@model BitirmeProjesi1.DTOS.FlightDTO
+
+
+<div class="text">
+    <h2>Ödeme Yöntemi</h2>
+    <div class="line"></div>
+    <select id="paymentMethod" class="payment" required>
+        <option value="" disabled selected>Ödeme Yöntemi Seçiniz</option>
+        <option value="credit_card">Kredi Kartı</option>
+        <option value="bank_transfer">Banka Havalesi</option>
+        <option value="paypal">PayPal</option>
+    </select>
+</div>
+
+<div class="text">
+    <h2>Yolcu Sayısı</h2>
+    <div class="line"></div>
+    <input type="text" id="passengerCount" class="passengerCount" required>
+</div>
+
+<input type="hidden" id="flightId" class="flightId" value="@Model.ID" />
+
+
+<article class="flight-card flights-list__item">
+    <div class="flight-card__airlines">
+        <div class="flight-card__airline">
+            <img src="//unsplash.it/30/30" alt="@Model.Airline" />
+        </div>
+        <div class="flight-card__airline">
+            <img src="//unsplash.it/30/30" alt="@Model.Airline" />
+        </div>
+    </div>
+    <div class="flight-card__departure">
+        <time class="flight-card__time">@Model.DepartureDate.ToShortTimeString()</time>
+        <h2 class="flight-card__city">@Model.DepartureLocation</h2>
+        <time class="flight-card__day">@Model.DepartureDate.ToShortDateString()</time>
+    </div>
+    <div class="flight-card__route">
+        <p class="flight-card__duration">@Model.SeatsAvailable</p>
+        <div class="flight-card__route-line route-line" aria-hidden="true">
+            <div class="route-line__stop route-line__start" aria-hidden="true"></div>
+            <div class="route-line__stop route-line__end" aria-hidden="true"></div>
+        </div>
+        <p class="flight-card__type">Standart</p>
+    </div>
+    <div class="flight-card__arrival">
+        <time class="flight-card__time">@Model.ArrivalDate.ToShortTimeString()</time>
+        <h2 class="flight-card__city">@Model.ArrivalLocation</h2>
+        <time class="flight-card__day">@Model.ArrivalDate.ToShortDateString()</time>
+    </div>
+    <div class="flight-card__action">
+        <p class="flight-card__price styled-price">
+            @Model.Price<sub>TRY</sub>
+        </p>
+
+        <button id="btn" class="btn">Rezervasyon Yap</button>
+        
+
+
+    </div>
+</article>
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/MorphSVGPlugin.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#btn').on('click', async function () {
+                // Seçilen verileri alıyoruz
+                const flightId = document.querySelector('#flightId').value; // Uçuş ID'sini alıyoruz
+                const PassengerCount = document.getElementById('passengerCount').value; // Yolcu sayısını alıyoruz
+                const paymentMethod = document.getElementById('paymentMethod').value;
+                console.log('Flight id:', flightId);
+                console.log('passengerCount:', PassengerCount);
+                console.log('paymentMethod:', paymentMethod);
+
+                // Kullanıcı ID'sini çekmek için API çağrısı
+                const userIdResponse = await fetch('/Customer/GetUserId', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const userIdData = await userIdResponse.json();
+                const userId = userIdData.id; // Kullanıcı ID'si
+
+                // Rezervasyon verilerini gönderiyoruz
+                const reservationResponse = await fetch('/Flight/BookFlight', { // Controller'a uygun URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        flightId: flightId,
+                        userId: userId,
+                        PassengerCount: parseInt(PassengerCount), // Yolcu sayısını tam sayı yapıyoruz
+                        paymentMethod: paymentMethod,
+                        checkInDate: "0002-02-02", // YYYY-MM-DD formatında tarih
+                        checkOutDate: "0002-02-02"  // YYYY-MM-DD formatında tarih
+                    })
+                });
+
+                const reservationData = await reservationResponse.json();
+                console.log('Reservation response:', reservationData);
+                if (reservationData.success) {
+                    alert('Uçuş rezervasyon işleminiz başarıyla oluşturuldu! Verdiğiniz bilgilere yönelik ücret hesaplanacak ve 1 iş günü içinde geri dönüş hesabınıza yapılacaktır.');
+                    window.location.href = '/Account/Login'; // Başarılı rezervasyondan sonra yönlendirme
+                } else {
+                    alert('Rezervasyon işlemi sırasında hata oluştu: ' + reservationData.message);
+                }
+
+        });
+    });
+</script>

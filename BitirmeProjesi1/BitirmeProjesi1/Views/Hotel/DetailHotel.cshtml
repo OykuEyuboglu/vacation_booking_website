@@ -1,0 +1,331 @@
+﻿@{
+    ViewData["Title"] = "DetailHotel";
+    Random random = new Random();
+
+    var randomFoto = string.Empty;
+
+    if (Model.FotoURLs.Count != 0)
+    {
+        randomFoto = Model.FotoURLs[random.Next(Model.FotoURLs.Count)];
+
+    }
+    else
+    {
+        randomFoto = null;
+    }
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+<link rel='stylesheet' href="~/css/HotelDetail.css">
+
+@model BitirmeProjesi1.DTOS.HotelDetailDTO
+
+
+<div class="section">
+
+    @if (randomFoto == null)
+    {
+        <div class="moving-image" style="background: url('https://ivang-design.com/svg-load/hotel/move-img@2x.jpg') repeat fixed; background-size: cover;"></div>
+
+        <div class="shadow-title" style="bottom:50px;font-size:30px; right:130px;text-transform: uppercase;"><b>ARKAPLAN TEMSİLİDİR<br /><i style="font-size:12px;">(henüz fotoğraf eklenmemiştir)</i></b></div>
+    }
+    else
+    {
+        <div class="moving-image" style="background: url('@randomFoto') repeat fixed; background-size: cover;"></div>
+    }
+
+
+    <div class="shadow-title">RotaTatil</div>
+    <div class="shadow-title" style="bottom:50px;font-size:25px; left:150px;text-transform: uppercase;text-align:left;"><b>@Model.Name</b></div>
+
+    <style>
+        .hiddenMap {
+            display: none;
+        }
+
+        .hiddenCompany {
+            display: none;
+        }
+
+        .hiddenDetail {
+            display: none;
+        }
+    </style>
+    <div class="shadow-title hiddenMap mapTitle" id="open-map-btn" style="bottom:200px; font-size:18px; right:410px">
+        <a href="#" class="hover-target" id="open-map-btn" style="color:black; background-color:antiquewhite">HARİTADA KONUMU BUL⤦</a>
+    </div>
+    <div class="shadow-title hiddenCompany companyTitle" id="open-company-btn" style="bottom:200px; font-size:18px; right:410px">
+        <a href="#" class="hover-target" id="open-company-btn" style="color:black; background-color:antiquewhite">KAMPANYALARI GÖR⤦</a>
+    </div>
+    <div class="DetailExplain hiddenDetail DetailTitle" style="background:none !important;">
+        <p class="DetailExplain" style="width:385px !important; height:250px !important;" id="info-text2">
+        </p>
+    </div>
+
+
+    <div class="headerBox" style="background-color:antiquewhite; width:910px; height:40px; margin-top:23px; opacity:30%; margin-left:80px;"></div>
+
+    <ul class="case-study-wrapper">
+        <li class="case-study-name">
+            <a href="#" class="hover-target">Otel</a>
+        </li>
+        <li class="case-study-name">
+            <a href="#" class="hover-target">Odalar</a>
+        </li>
+        <li class="case-study-name">
+            <a href="#" class="hover-target">Ulaşım ve Eğlence</a>
+        </li>
+        <li class="case-study-name">
+            <a href="#" class="hover-target">İndirim</a>
+        </li>
+    </ul>
+
+
+    <div class="row">
+        <div class="col-6">
+            <!-- ALTINDAKİ ÖZELLİKLER İMGESİ -->
+            <ul class="case-study-images">
+                <li>
+                    <img style="width: 500px; height:300px;" src="@Model.MainFotoURL" alt="">
+                    <p style="top:10px;">Hakkında✧</p>
+                    <div class="info">
+                        <img src="https://ivang-design.com/svg-load/hotel/1.svg" alt="">
+                        <img src="https://ivang-design.com/svg-load/hotel/2.svg" alt="">
+                        <img src="https://ivang-design.com/svg-load/hotel/3.svg" alt="">
+                        <img src="https://ivang-design.com/svg-load/hotel/5.svg" alt="">
+
+                        <a href="#" class="hover-target" onclick="checkLogin(event, '@Model.Id')">REZERVASYON YAPTIR</a>
+                    </div>
+                </li>
+                <li>
+
+                    <div id="imageContainer">
+                        @if (Model.FotoURLs != null && Model.FotoURLs.Any())
+                        {
+                            <img id="dynamicImage" style="width: 500px !important; height: 300px !important;" src="@Model.FotoURLs[0]" alt="Image" />
+                        }
+                    </div>
+
+                    <p>Suitler⋆˚✿˖°</p>
+                    <div class="info">
+                        <img src="https://ivang-design.com/svg-load/hotel/3.svg" alt="">
+                        <img src="https://ivang-design.com/svg-load/hotel/4.svg" alt="">
+                        <img src="https://ivang-design.com/svg-load/hotel/6.svg" alt="">
+                        <img src="https://ivang-design.com/svg-load/hotel/5.svg" alt="">
+
+                        <a href="#" class="hover-target" onclick="checkLogin(event, '@Model.Id')">REZERVASYON YAPTIR</a>
+                    </div>
+                </li>
+                <li>
+                    <img style="width: 500px; height:300px;" src="https://cdn.bubilet.com.tr/files/Blog/resim-adi-37993.jpg" alt="">
+                    <p>Konserler~♪♫</p>
+                    <div class="info">
+                        <img src="https://ivang-design.com/svg-load/hotel/3.svg" alt="">
+
+                        <a href="#" class="hover-target" onclick="checkLogin(event, '@Model.Id')">REZERVASYON YAPTIR</a>
+                    </div>
+                </li>
+                <li>
+                    <img style="width: 500px; height:300px;" src="https://media.istockphoto.com/id/1432456087/tr/vekt%C3%B6r/3d-tag-price-icon-with-bell-notification-for-discount-coupon-online-sales-with-an-excellent.jpg?s=612x612&w=0&k=20&c=_ZDM4HiHkDZO7jUNnKEvxF0awLuNHLoll4DAT-XsgfI=" alt="">
+                    <p>İndirimler⛱</p>
+                    <div class="info">
+                        <img src="https://ivang-design.com/svg-load/hotel/1.svg" alt="">
+                        <img src="https://ivang-design.com/svg-load/hotel/6.svg" alt="">
+
+                        <a href="#" class="hover-target" onclick="checkLogin(event, '@Model.Id')">REZERVASYON YAPTIR</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-6">
+            <!-- Sağ Taraf: Bilgi Kutusu -->
+            <div class="info-box">
+                <h3 class="" style="text-decoration:underline;">@Model.Name</h3>
+                <p class="infoboxP" id="info-text"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class='cursor' id="cursor"></div>
+<div class='cursor2' id="cursor2"></div>
+<div class='cursor3' id="cursor3"></div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+
+<script>
+    $(document).ready(function () {
+        // Bilgi kutusunu tıklanan menüye göre günceller
+        $('.case-study-name:nth-child(1)').on("mousemove", function () {
+            var hotelDescription = '@Model.Description';
+            $('#info-text').html(hotelDescription);
+            $('.mapTitle').addClass('hiddenMap'); // Butonu gizle
+            $('.companyTitle').addClass('hiddenCompany');
+            $('.DetailTitle').addClass('hiddenDetail');
+
+        });
+
+        let captions = @Html.Raw(Json.Serialize(Model.FotoCaptions)); // Modelden gelen caption'lar
+        let currentIndex = 0;
+
+        // İlk başlığı göster
+        $('#info-text2').html(captions[currentIndex]);
+
+        // 5 saniyede bir caption değiştir
+        setInterval(function () {
+            currentIndex = (currentIndex + 1) % captions.length; // İndeksi artır ve dizinin sonuna geldiğinde başa dön
+            $('#info-text2').html(captions[currentIndex]); // Yeni başlığı göster
+        }, 5000); // 5000 ms = 5 saniye
+
+        $('.case-study-name:nth-child(2)').on("mousemove", function () {
+            // Fare ile üzerine gelindiğinde mevcut başlığı göster
+            $('#info-text2').html(captions[currentIndex]);
+            $('.mapTitle').addClass('hiddenMap');
+            $('.companyTitle').addClass('hiddenCompany');
+            $('.DetailTitle').removeClass('hiddenDetail');
+        });
+
+        $('.case-study-name:nth-child(3)').on("mousemove", function () {
+            $('#info-text').html('Otelimizde eğlence dolu aktiviteler sizi bekliyor. <br><br><b>HEMEN YERİNİ AYIRT.</b><br> Birçok konser ve tur hizmetleri için haritadan yakın lokasyonları keşfedebilirsin!.<br><br> Birbirinden benzersiz etkinliklerle <b>tatilinin ROTASI</b> benzersiz olsun.<br><br>');
+            $('.mapTitle').removeClass('hiddenMap');
+            $('.companyTitle').addClass('hiddenCompany');
+            $('.DetailTitle').addClass('hiddenDetail');
+
+        });
+        $('.case-study-name:nth-child(4)').on("mousemove", function () {
+            $('#info-text').html('<i style="font-size=18px;"> Tatil yapmanın tam zamanı! </i> <br><br> Sen de <b> Rotanı Tatile </b> çevir. Fırsatların tadını çıkar!! <br> Kampanyaları incele ve sana uygun kampanya kodlarını kullanmayı unutma!!');
+            $('.mapTitle').addClass('hiddenMap');
+            $('.companyTitle').removeClass('hiddenCompany');
+            $('.DetailTitle').addClass('hiddenDetail');
+
+
+        });
+
+        // Butona tıklayınca Google Maps'te aç
+        $('#open-map-btn').on("click", function (event) {
+            event.preventDefault();
+
+            var cityFromModel = '@Html.Raw(Model.Location)';
+            console.log(cityFromModel);
+
+            var googleMapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(cityFromModel);
+            window.open(googleMapsUrl, '_blank'); // Yeni sekmede aç
+        });
+
+        $('#open-company-btn').on("click", function (event) {
+            event.preventDefault();
+            window.location.href = '/Account/Companies'; // Controller'daki aksiyonuna yönlendir
+        });
+
+    });
+
+
+    (function ($) {
+        "use strict";
+
+        //Page cursors
+        document.getElementsByTagName("body")[0].addEventListener("mousemove", function (n) {
+            t.style.left = n.clientX + "px",
+                t.style.top = n.clientY + "px",
+                e.style.left = n.clientX + "px",
+                e.style.top = n.clientY + "px",
+                i.style.left = n.clientX + "px",
+                i.style.top = n.clientY + "px"
+        });
+        var t = document.getElementById("cursor"),
+            e = document.getElementById("cursor2"),
+            i = document.getElementById("cursor3");
+        function n(t) {
+            e.classList.add("hover"), i.classList.add("hover")
+        }
+        function s(t) {
+            e.classList.remove("hover"), i.classList.remove("hover")
+        }
+        s();
+        for (var r = document.querySelectorAll(".hover-target"), a = r.length - 1; a >= 0; a--) {
+            o(r[a])
+        }
+        function o(t) {
+            t.addEventListener("mouseover", n), t.addEventListener("mouseout", s)
+        }
+
+        var pos = 0;
+        window.setInterval(function () {
+            pos++;
+            document.getElementsByClassName('moving-image')[0].style.backgroundPosition = pos + "px 0px";
+        }, 18
+        );
+
+        $(document).ready(function () {
+
+            $('.case-study-name:nth-child(1)').on('mouseenter', function () {
+                $('.case-study-name.active').removeClass('active');
+                $('.case-study-images li.show').removeClass("show");
+                $('.case-study-images li:nth-child(1)').addClass("show");
+                $('.case-study-name:nth-child(1)').addClass('active');
+            })
+            $('.case-study-name:nth-child(2)').on('mouseenter', function () {
+                $('.case-study-name.active').removeClass('active');
+                $('.case-study-images li.show').removeClass("show");
+                $('.case-study-images li:nth-child(2)').addClass("show");
+                $('.case-study-name:nth-child(2)').addClass('active');
+            })
+            $('.case-study-name:nth-child(3)').on('mouseenter', function () {
+                $('.case-study-name.active').removeClass('active');
+                $('.case-study-images li.show').removeClass("show");
+                $('.case-study-images li:nth-child(3)').addClass("show");
+                $('.case-study-name:nth-child(3)').addClass('active');
+            })
+            $('.case-study-name:nth-child(4)').on('mouseenter', function () {
+                $('.case-study-name.active').removeClass('active');
+                $('.case-study-images li.show').removeClass("show");
+                $('.case-study-images li:nth-child(4)').addClass("show");
+                $('.case-study-name:nth-child(4)').addClass('active');
+            })
+            $('.case-study-name:nth-child(1)').trigger('mouseenter')
+
+        });
+
+    })(jQuery);
+
+</script>
+
+
+<script>
+    let images = @Html.Raw(Json.Serialize(Model.FotoURLs));
+    let currentIndex = 0;
+
+    function changeImage() {
+        currentIndex = (currentIndex + 1) % images.length; // Sırası ile ilerle
+        document.getElementById("dynamicImage").src = images[currentIndex];
+    }
+
+    setInterval(changeImage, 5000); // 5 saniyede bir görüntüyü değiştir
+</script>
+
+<script>
+    function checkLogin(event, hotelId) {
+        event.preventDefault();
+
+        // Kullanıcı giriş durumunu kontrol et
+        var isLoggedIn = @Html.Raw(User.Identity.IsAuthenticated.ToString().ToLower());
+
+        if (isLoggedIn) {
+            makeReservation(hotelId);
+
+        } else {
+            // Giriş yapmamışsa uyarı ver ve anasayfaya yönlendir
+            alert("Önce giriş yapmalısınız.");
+        }
+    }
+
+    function makeReservation(hotelId) {
+        // Rezervasyon sayfasına yönlendirme
+        window.location.href = '/Hotel/ReservationHotel?hotelId=' + hotelId;
+    }
+</script>

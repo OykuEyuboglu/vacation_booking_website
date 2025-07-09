@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "ReservationHotel";
+}
+@{
+    ViewBag.HideFooter = true;  // Bu view'da footer'ı gizle
+}
+@{
+    Layout = null; // Layout'u devre dışı bırak
+}
+
+<link rel="stylesheet" href="~/css/Reservation.css" asp-append-version="true" />
+
+ @model BitirmeProjesi1.DTOS.HotelDTO
+
+ <style>
+     body::after{
+        background-image: url('@Model.MainFotoURL');
+    }
+ </style>
+<body>
+
+    <div style="position: fixed; top: 10px; left: 10px;">
+        <a asp-controller="Hotel" asp-action="Index" class="returnButton">◀</a>
+    </div>
+
+
+    <div class="container reservation-form">
+        
+        <div class="content">
+            <h1>@Model.Name</h1>
+            <div class="text">
+                <h2>Giriş Tarihi</h2>
+                <div class="line"></div>
+                <input type="date" id="CheckInDate" class="date" required>
+            </div>
+            <div class="text">
+                <h2>Çıkış Tarihi</h2>
+                <div class="line"></div>
+                <input type="date" id="CheckOutDate" class="date" required>
+            </div>
+             <div class="text">
+                <h2>Room</h2>
+                <div class="line"></div>
+                <label>
+                    <input type="radio" name="roomType" value="single" required>
+                    Tek Oda(1-4 kişilik)
+                </label> <br />
+                <label>
+                    <input type="radio" name="roomType" value="double">
+                    İki Odalı(2-5 kişilik)
+                </label> <br />
+                <label>
+                    <input type="radio" name="roomType" value="suite">
+                    Suit Oda (2-8 kişilik)
+                </label>
+            </div>
+
+            <div class="text">
+                <h2>Ödeme Yöntemi</h2>
+                <div class="line"></div>
+                <select id="paymentMethod" class="payment" required>
+                    <option value="" disabled selected>Ödeme Yöntemi Seçiniz</option>
+                    <option value="credit_card">Kredi Kartı</option>
+                    <option value="bank_transfer">Banka Havalesi</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+
+            <button id="confirmButton" onclick="addEventListener()">Ön Rezervasyonu Onayla</button>
+
+            <p class="info">● Oda türüne göre ücretlendirme yapılır. Ek yatak için sabit ücret eklenir.</p>
+
+
+                    <div>
+                    <h4 style="text-align:left; padding-left:15px; padding-top:20px;">@Model.STARTPricePerNight <b style="font-size:12px;">TRY</b>'den BAŞLAYAN FİYATLAR</h4>             
+                    </div>
+        </div>
+        
+
+        <div class="image" style="background-image: url('@Model.MainFotoURL');"></div> <!--Dinamik fotoğraf buradan geliyor -->
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+
+    <script>
+        document.getElementById('confirmButton').onclick = async function (event) {
+            event.preventDefault(); // Butonun varsayılan davranışını engelle
+
+            try {
+                // Seçilen verileri alıyoruz
+                const roomType = document.querySelector('input[name="roomType"]:checked').value;
+                const CheckInDate = document.getElementById('CheckInDate').value; // YYYY-MM-DD formatında
+                const CheckOutDate = document.getElementById('CheckOutDate').value; // YYYY-MM-DD formatında
+                const paymentMethod = document.getElementById('paymentMethod').value;
+                console.log('Giriş Tarihi:', CheckInDate);
+                console.log('Çıkış Tarihi:', CheckOutDate);
+
+
+                // Oda ID'sini çekmek için API çağrısı
+                const roomIdResponse = await fetch('/Hotel/GetRoomId', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        roomType: roomType,
+                        hotelId: '@Model.Id'
+
+                    })
+                });
+
+                const roomIdData = await roomIdResponse.json();
+                const roomId = roomIdData.id; // Oda ID'sini aldık
+
+                // Kullanıcı ID'sini çekmek için API çağrısı
+                const userIdResponse = await fetch('/Customer/GetUserId', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const userIdData = await userIdResponse.json();
+                const userId = userIdData.id; // Kullanıcı ID'sini aldık
+
+                // Rezervasyon verilerini gönderiyoruz
+                const reservationResponse = await fetch('/Hotel/BookHotel', { // Controller'a uygun URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        roomId: roomId,
+                        userId: userId,
+                        roomType: roomType,
+                        CheckInDate: CheckInDate,
+                        CheckOutDate: CheckOutDate,
+                        paymentMethod: paymentMethod
+                    })
+                });
+
+                const reservationData = await reservationResponse.json();
+                if (reservationData.success) {
+                    alert('@Model.Name, için Ön Rezervasyon işleminiz başarıyla oluşturuldu! Verdiğiniz bilgilere yönelik ücret hesaplanacak ve 1 iş günü içinde geri dönüş hesabınıza yapılacaktır.');
+                    window.location.href = '/Account/Login';
+
+                } else {
+                    alert('Rezervasyon işlemi sırasında hata oluştu.');
+                }
+            } catch (error) {
+                console.error('Hata:', error);
+                alert('HATA! Lütfen formu eksiksiz doldurunuz.');
+            }
+        };
+    </script>
+
+</body>

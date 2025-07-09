@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewData["Title"] = "PartialRegister";
+}
+
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/BitirmeProjesi1.styles.css" asp-append-version="true" />
+<link rel="stylesheet" href="/css/Layout.css">
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+
+@using BitirmeProjesi1.DTOS
+@model BitirmeProjesi1.DTOS.RegisterDTO
+
+
+<form asp-controller="Account" asp-action="Register" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="row">
+
+        <div class="col-6">
+
+            <div class="input-box">
+                <span class="icon"><ion-icon name="person"></ion-icon></span>
+                <input class="inputInput" type="text" name="FirstName" required>
+                <label class="inputLabel">Kullanıcı Adı</label>
+            </div>
+
+            <div class="input-box">
+                <span class="icon"><ion-icon name="person"></ion-icon></span>
+                <input class="inputInput" type="text" name="LastName" required>
+                <label class="inputLabel">Soyadı</label>
+            </div>
+
+            <div class="input-box">
+                <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                <input class="inputInput" type="email" name="Email" required>
+                <label class="inputLabel">Gmail</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                <input class="inputInput" type="password" name="Password" required>
+                <label class="inputLabel">Şifre</label>
+            </div>
+        </div>
+
+        <div class="col-6">
+
+            <div class="input-box">
+                <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
+                <input class="inputInput" type="text" name="PhoneNumber" required>
+                <label class="inputLabel">Telefon Numarası</label>
+            </div>
+
+            <div class="input-box">
+                <span class="icon"><ion-icon name="location-sharp"></ion-icon></span>
+                <input class="inputInput" type="text" name="Address" required>
+                <label class="inputLabel">Adres</label>
+            </div>
+
+            <div class="input-box">
+                <span class="icon"><ion-icon name="pin-sharp"></ion-icon></span>
+                <input class="inputInput" type="text" name="City" required>
+                <label class="inputLabel">Şehir</label>
+            </div>
+
+            <div class="input-box">
+                <span class="icon"><ion-icon name="locate-sharp"></ion-icon></span>
+                <input class="inputInput" type="text" name="Country" required>
+                <label class="inputLabel">Ülke</label>
+            </div>
+        </div>
+    </div>
+
+
+    <form asp-controller="Account" asp-action="Register" method="post" style="display:inline;">
+        <button type="submit" class="btn-detail btn">Üye Ol</button>
+    </form>
+
+
+    <div class="login-register">
+        <p>Zaten bir hesabın mı var?<a href="#" class="login-link">Giriş Yap</a></p>
+    </div>
+
+</form>
+
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>

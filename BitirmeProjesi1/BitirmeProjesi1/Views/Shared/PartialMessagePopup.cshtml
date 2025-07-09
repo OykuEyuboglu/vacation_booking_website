@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "PartialMessagePopup";
+}
+
+
+<div id="deleteSuccessPopup" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Başarı</h5>
+                <span aria-hidden="true">&times;</span>
+            </div>
+            <div class="modal-body">
+
+
+                @if (ViewBag.WhichPage == "AddHotelPage")
+                {
+                    <p>Otel başarıyla eklendi.</p>
+                }
+                else if (ViewBag.WhichPage == "UpdateHotelPage")
+                {
+                    <p>Otel başarıyla güncellendi.</p>
+                }
+                else if (ViewBag.WhichPage == "DeleteHotelPage")
+                {
+                    <p>Otel başarıyla silindi.</p>
+                }
+                else if (ViewBag.WhichPage == "UpdateFlightPage")
+                {
+                    <p>Uçuş başarıyla güncellendi.</p>
+                }
+                else if (ViewBag.WhichPage == "AddFlightPage")
+                {
+                    <p>Uçuş başarıyla eklendi.</p>
+                }
+                else if (ViewBag.WhichPage == "DeleteFlightPage")
+                {
+                    <p>Uçuş başarıyla silindi.</p>
+                }
+                else if (ViewBag.WhichPage == "AddFotoPage")
+                {
+                    <p>Fotoğraf başarıyla eklendi.</p>
+                }
+                else if (ViewBag.WhichPage == "FotoDeletePage")
+                {
+                    <p>Fotoğraf başarıyla silindi.</p>
+                }
+                else if (ViewBag.WhichPage == "RoomUpdatePage")
+                {
+                    <p>Oda başarıyla güncellendi.</p>
+                }
+                else if (ViewBag.WhichPage == "RoomDeletePage")
+                {
+                    <p>Oda başarıyla silindi.</p>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+<!-- Silme işlemi popup'ını tetikleyen script -->
+<script>
+    $(document).ready(function () {
+    @if (TempData["DeleteStatus"] != null && TempData["DeleteStatus"].ToString() == "success")
+    {
+        <text>
+                    $('#deleteSuccessPopup').modal('show');
+        </text>
+    }
+            });
+</script>

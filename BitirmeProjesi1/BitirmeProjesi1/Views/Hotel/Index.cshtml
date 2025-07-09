@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="~/css/Hotel.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+@model List<BitirmeProjesi1.DTOS.HotelDTO>
+
+
+<br /><br /><br /><br /><br /><br />
+<h1>BİRBİRİNDEN EŞSİZ OTELLER <b>☆</b></h1>
+<h4><b>HEMEN İNCELEMEYE BAŞLA!</b></h4>
+<h6><b>☆</b> Sana özel fırsatları kaçırma <b>☆</b></h6>
+
+@if (Model != null)
+{
+    @foreach (var hotel in Model)
+    {
+        <div class="wrapper" style="height:780px;">
+            <h1 alt="">@hotel.Name</h1>
+            <div>
+                <img class="image" src="@hotel.MainFotoURL" alt="Image of @hotel.Name">
+            </div>
+            <div class="details">
+                <h1><em>@hotel.Description</em></h1>
+                <h2>@hotel.Location</h2>
+                <div>
+                    @hotel.Rating Yıldızlı <br />
+
+                    @for (int i = 0; i < hotel.Rating; i++)
+                    {
+                        <p style="display: inline; font-size:xx-large">★</p>
+                    }
+                </div>
+
+                <div>
+                    <h4 style="text-align:left; padding-left:15px;">@hotel.STARTPricePerNight <b style="font-size:12px;">TRY</b>'den BAŞLAYAN FİYATLAR</h4>
+                </div>
+            </div>
+
+            <form asp-controller="Hotel" asp-action="DetailHotel" method="get">
+                <input type="hidden" name="id" value="@hotel.Id" />
+                <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Detaylı İncele</button>
+            </form>
+
+            <style>
+
+                .flight-card__cta{
+                    border-color: palevioletred;
+                }
+                .flight-card__cta.button:hover {
+                    background-color: lightpink;
+                    color: white;
+                    border-color:hotpink;
+                }
+            </style>
+
+        </div>
+
+    }
+
+}
+
+
+

@@ -1,0 +1,71 @@
+﻿
+#runway, #left, #mid, #right, #plane-body, #plane-shadow, #plane-light {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#btn, #btn-wrapper {
+    cursor: pointer;
+}
+
+#tail, #tail-l, #tail-r, #windows, #pilot-window, #engine-l, #engine-r, #wing-l, #wing-r {
+    opacity: 0;
+}
+
+
+/*panel*/
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.text {
+    background-color: #cbcbcb;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.line {
+    width: 200px;
+    height: 3px;
+    background-color: #b4b4b4;
+    margin-bottom: 10px;
+}
+
+.payment {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b4b4b4;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.passengerCount {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b4b4b4;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.payment:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.passengerCount:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+option {
+    padding: 10px;
+}

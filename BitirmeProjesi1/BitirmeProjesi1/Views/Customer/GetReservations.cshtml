@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "GetReservations";
+}
+
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+
+@model IEnumerable<BitirmeProjesi1.DTOS.ReservationListDTO>
+
+<br />
+<br />
+<br />
+<br />
+<h2>REZERVASYONLARIM<b>☆</b></h2>
+
+<style>
+    .table{
+        background-color: rgba(95,158,160,0.7);
+        
+    }
+</style>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Otel Adı</th>
+            <th>Kullanıcı Adı</th>
+            <th>Oda Tipi</th>
+            <th>Ödeme Yöntemi</th>
+            <th>Giriş Tarihi</th>
+            <th>Çıkış Tarihi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var reservation in Model)
+            {
+                <tr>
+                    <td>@reservation.HotelName</td>
+                    <td>@reservation.Username</td>
+                    <td>@reservation.RoomType</td>
+                     <td>@reservation.PaymentMethod</td>
+                     <td>@reservation.CheckInDate.ToShortDateString()</td>
+                    <td>@reservation.CheckOutDate.ToShortDateString()</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">Hiç rezervasyon bulunmamaktadır.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

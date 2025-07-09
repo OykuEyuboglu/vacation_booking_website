@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "PartialFlightList";
+}
+
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/AddFlight.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/BitirmeProjesi1.styles.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+
+@model List<BitirmeProjesi1.DTOS.FlightDTO>
+
+
+<div class="container">
+    <section class="dashboard">
+        <section class="flights">
+            <section class="flights-list">
+
+
+                @foreach (var flight in Model)
+                {
+                    <article class="flight-card flights-list__item">
+                        <div class="flight-card__airlines">
+                            <div class="flight-card__airline">
+                                <img src="//unsplash.it/30/30" alt="@flight.Airline" />
+                            </div>
+                            <div class="flight-card__airline">
+                                <img src="//unsplash.it/30/30" alt="@flight.Airline" />
+                            </div>
+                        </div>
+                        <div class="flight-card__departure">
+                            <time class="flight-card__time">@flight.DepartureDate.ToShortTimeString()</time>
+                            <h2 class="flight-card__city">@flight.DepartureLocation</h2>
+                            <time class="flight-card__day">@flight.DepartureDate.ToShortDateString()</time>
+                        </div>
+                        <div class="flight-card__route">
+                            <p class="flight-card__duration">@flight.SeatsAvailable</p>
+                            <div class="flight-card__route-line route-line" aria-hidden="true">
+                                <div class="route-line__stop route-line__start" aria-hidden="true"></div>
+                                <div class="route-line__stop route-line__end" aria-hidden="true"></div>
+                            </div>
+                            <p class="flight-card__type">Standart</p>
+                        </div>
+                        <div class="flight-card__arrival">
+                            <time class="flight-card__time">@flight.ArrivalDate.ToShortTimeString()</time>
+                            <h2 class="flight-card__city">@flight.ArrivalLocation</h2>
+                            <time class="flight-card__day">@flight.ArrivalDate.ToShortDateString()</time>
+                        </div>
+                        <div class="flight-card__action">
+                            <p class="flight-card__price styled-price">
+                                @flight.Price<sub>TRY</sub>
+                            </p>
+
+                            @if (ViewBag.WhichPage == "IndexFlightPage")
+                            {
+                                <form asp-controller="Flight" asp-action="PreReservation" method="get">
+                                    <input type="hidden" name="id" value="@flight.ID" />
+                                    <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px" onclick="checkLogin(event)">İSTEK GÖNDER</button>
+                                </form>
+                                <style>
+                                    .flight-card__cta.button:hover {
+                                        background-color: lightpink;
+                                        color: white;
+                                    }
+                                </style>
+
+                            }
+                            else if (ViewBag.WhichPage == "AddFlightPage")
+                            {
+
+                            }
+                            else if (ViewBag.WhichPage == "DeleteFlightPage")
+                            {
+                                <form asp-controller="Flight" asp-action="DeleteFlightConfirmed" method="post">
+                                    <input type="hidden" name="id" value="@flight.ID" />
+                                    <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Sil</button>
+                                </form>
+
+                                <style>
+                                    .flight-card__cta.button:hover {
+                                        background-color: red;
+                                        color: white;
+                                    }
+                                </style>
+                            }
+                            else if (ViewBag.WhichPage == "UpdateFlightPage")
+                            {
+                                <form asp-controller="Flight" asp-action="UpdateFlight" method="get">
+                                    <input type="hidden" name="id" value="@flight.ID" />
+                                    <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Güncelle</button>
+                                </form>
+
+                                <style>
+                                    .flight-card__cta.button:hover {
+                                        background-color: cadetblue;
+                                        color: white;
+                                    }
+                                </style>
+                            }
+                        </div>
+                    </article>
+                }
+            </section>
+        </section>
+    </section>
+</div>
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function checkLogin(event) {
+        var isAuthenticated = '@User.Identity.IsAuthenticated';
+
+        if (isAuthenticated !== 'True') {
+            event.preventDefault();
+            alert('Lütfen önce oturum açın.');
+        }
+    }
+</script>

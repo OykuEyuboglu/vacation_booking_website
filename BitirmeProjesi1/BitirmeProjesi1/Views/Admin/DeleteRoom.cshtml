@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "DeleteRoom";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="~/css/AddFlight.css" asp-append-version="true" /> @* Add paneli aynı *@
+
+@model List<BitirmeProjesi1.DTOS.RoomDTO>
+
+@await Html.PartialAsync("PartialMessagePopup")
+
+
+@await Html.PartialAsync("DeleteHotel", ViewData["Hotels"])
+
+
+<style>
+    .flight-card__cta.button:hover {
+        background-color: crimson;
+        color: white;
+    }
+</style>
+<div class="container">
+
+    @if (Model != null)
+    {
+        <h2>Seçilen Otelin Odalar</h2>
+
+        if (Model.Count > 0)
+        {
+
+            <div class="row">
+                @foreach (var room in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+
+                            <div class="card-body">
+                                @if (@room.RoomType == "double")
+                                {
+                                    <p class="card-text">Oda Türü: İki odalı</p>
+                                }
+                                else if (@room.RoomType == "suite")
+                                {
+                                    <p class="card-text">Oda Türü: Suit odalı</p>
+                                }
+                                else if (@room.RoomType == "single")
+                                {
+                                    <p class="card-text">Oda Türü: Tek odalı</p>
+                                }
+                            </div>
+
+                            <div class="card-body">
+                                <p class="card-text">Gecelik Fiyat: @room.PricePerNight</p>
+                            </div>
+                            <div class="card-body">
+
+                                @if (@room.IsAvailable == false)
+                                {
+                                    <p class="card-text">Müsaitlik Durumu: Müsait</p>
+                                }
+                                else if (@room.IsAvailable == true)
+                                {
+                                    <p class="card-text">Müsaitlik Durumu: Dolu</p>
+                                }
+                            </div>
+
+                            <form asp-controller="Admin" asp-action="DeleteRoomm" method="post">
+                                <input type="hidden" name="id" value="@room.Id" />
+                                <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Sil</button>
+                            </form>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>Bu otel için herhangi bir oda bulunmamaktadır.</p>
+        }
+    }
+</div>

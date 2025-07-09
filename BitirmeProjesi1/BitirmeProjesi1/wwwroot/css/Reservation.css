@@ -1,0 +1,135 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+}
+
+body::after {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    filter: blur(7px);
+}
+
+.container {
+    z-index: 10;
+    width: 800px;
+    max-width: 800px;
+    height: 500px;
+    background: black;
+    color: white;
+    display: flex;
+}
+
+.returnButton {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #3498db;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.content {
+    width: 50%;
+    height: 100%;
+    background: rgb(43, 42, 42);
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+}
+
+    .content h1 {
+        margin: 20px 0;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 800;
+    }
+
+    .content .text {
+        margin-bottom: 15px;
+    }
+
+.line {
+    width: 185px;
+    height: 1.5px;
+    background: rgb(76, 77, 75);
+    margin-bottom: 9px;
+}
+
+
+.text p {
+    color: rgb(240, 26, 97);
+    font-size: 15px;
+}
+
+.date {
+    font-size: 16px;
+    width: 160px;
+}
+
+.payment {
+    font-size: 16px;
+    width: 200px;
+}
+
+button {
+    background: rgb(240, 26, 97);
+    padding: 12px 15px;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 17px;
+    border-radius: 45px;
+    transition: .3s ease;
+    margin-right: 30px;
+}
+
+    button:hover {
+        background: rgb(179, 17, 71);
+    }
+
+.info {
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+.image {
+    width: 50%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+@media (max-width: 600px) {
+    .content {
+        width: 100%;
+    }
+
+    .image {
+        display: none;
+    }
+}

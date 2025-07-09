@@ -1,0 +1,143 @@
+﻿@{
+    ViewData["Title"] = "UpdateRoom";
+}
+
+
+<link rel="stylesheet" href="~/css/Hotel.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/AddFlight.css" asp-append-version="true" /> @* Add paneli aynı *@
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+
+@* HOTEL'İN GÜNCELLE BUTONUNA BASILINCA GİRİLEN SAYFA *@
+
+@model List<BitirmeProjesi1.DTOS.RoomDTO>
+
+
+@await Html.PartialAsync("DeleteHotel", ViewData["Hotels"])
+
+
+
+@if (Model.Count == 1)
+{
+    <div class="container">
+        <h2 style="font-weight:600; color:aliceblue; margin-left: 400px;">
+            Oda Güncelle
+        </h2>
+
+        <form asp-controller="Admin" asp-action="UpdateRoom" method="post">
+            <div class="form-group">
+                <label for="Room">Oda Türü</label>
+                <input type="text" class="form-control" id="RoomType" name="RoomType" value="@Model[0].RoomType" required>
+            </div>
+            <div class="form-group">
+                <label for="PricePerNight">Gecelik Fiyatı</label>
+                <input type="text" class="form-control" id="PricePerNight" name="PricePerNight" value="@Model[0].PricePerNight" required>
+            </div>
+
+        <div class="form-group">
+
+                <div class="text">
+                    <h2 for="IsAvailable">Müsaitlik Durumu</h2>
+
+                    <label>
+                        <input type="radio" name="IsAvailable" id="IsAvailable" value="false" @(Model[0].IsAvailable ? "" : "checked") required>
+                        Müsait
+                    </label> <br />
+                    <label>
+                        <input type="radio" name="IsAvailable" id="IsAvailable" value="true" @(Model[0].IsAvailable ? "checked" : "")>
+                        Dolu
+                    </label>
+                </div>
+
+        </div>
+
+
+            <div class="form-group">
+                <label for="HotelID">Otel ID</label>
+                <input type="text" class="form-control" id="HotelID" name="HotelID" value="@Model[0].HotelID" required>
+            </div>
+
+            <input type="hidden" name="id" value="@Model[0].Id" />
+
+            <button type="submit" onclick="updateAvailability()" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Oda Güncelle</button>
+            <style>
+                .flight-car__cta:hover{
+                    background-color: darkcyan !important;
+                }
+            </style>
+        </form>
+    </div>
+
+}else
+{
+
+    <div class="container">
+
+        @if (Model != null)
+        {
+            <h2>Seçilen Otelin Odalar</h2>
+
+            if (Model.Count > 0)
+            {
+
+                <div class="row">
+                    @foreach (var room in Model)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-4 box-shadow">
+
+                                <div class="card-body">
+                                    @if (@room.RoomType == "double")
+                                    {
+                                        <p class="card-text">Oda Türü: İki odalı</p>
+                                    }
+                                    else if (@room.RoomType == "suite")
+                                    {
+                                        <p class="card-text">Oda Türü: Suit odalı</p>
+                                    }
+                                    else if (@room.RoomType == "single")
+                                    {
+                                        <p class="card-text">Oda Türü: Tek odalı</p>
+                                    }
+                                </div>
+
+                                <div class="card-body">
+                                    <p class="card-text">Gecelik Fiyat: @room.PricePerNight</p>
+                                </div>
+                                <div class="card-body">
+
+                                    @if (room.IsAvailable == false)
+                                    {
+                                        <p class="card-text">Müsaitlik Durumu: Müsait</p>
+                                    }
+                                    else if (room.IsAvailable == true)
+                                    {
+                                        <p class="card-text">Müsaitlik Durumu: Dolu</p>
+                                    }
+                                </div>
+
+                                <form asp-controller="Admin" asp-action="UpdateRoom" method="get">
+                                    
+                                    <input type="hidden" name="Id" value="@room.Id" />
+
+                                    <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Güncelle</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>Bu otel için herhangi bir oda bulunmamaktadır.</p>
+            }
+        }
+    </div>
+
+}
+
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

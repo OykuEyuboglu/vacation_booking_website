@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "AddRoom";
+}
+@{
+    ViewBag.HideFooter = true;  // Bu view'da footer'ı gizle
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/Reservation.css" asp-append-version="true" />@* Add paneli aynı *@
+
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+@model List<BitirmeProjesi1.DTOS.RoomDTO>
+
+
+<style>
+    body {
+        margin-top: 80px;
+        background-color: white;
+        width: 100% !important;
+    }
+
+    .content {
+        background: none !important;
+        background-color: #aae6fab2 !important;
+        width: 100% !important;
+    }
+
+    .container {
+        background: none !important;
+        color: steelblue;
+        width: 100% !important;
+        margin-left: 100px;
+    }
+
+    .allInfo {
+        width: 900px !important;
+    }
+
+    .button1 {
+        width: 300px !important;
+        text-align: center;
+        margin-left: 25%;
+        margin-right: 25%;
+        background-color:cadetblue;
+    }
+
+    #RoomType {
+        color: black;
+    }
+</style>
+
+<form asp-controller="Admin" asp-action="AddRoom" method="post">
+
+    <div class="container reservation-form">
+
+        <div class="content">
+
+            <h1 style="font-weight:600; color:black; text-decoration:underline">
+                Oda Ekle
+            </h1>
+
+            <div class="allInfo">
+
+
+                <div class="text">
+                    <h2 for="HotelID">Otel Id</h2>
+                    <input type="text" class="payment" id="HotelID" name="HotelID" required>
+                </div>
+
+                <div class="text">
+                    <h2 for="PricePerNight">Gecelik Başlangıç Fiyatı</h2>
+                    <input type="text" id="PricePerNight" name="PricePerNight" class="payment" required>
+                </div>
+
+                <div class="text">
+                    <h2 for="roomType">Otel Türü</h2>
+                    <label>
+                        <input type="radio" name="RoomType" id="RoomType" value="single" required>
+                        Tek Oda(1-4 kişilik)
+                    </label> <br />
+                    <label>
+                        <input type="radio" name="RoomType" id="RoomType" value="double">
+                        İki Odalı(2-5 kişilik)
+                    </label> <br />
+                    <label>
+                        <input type="radio" name="RoomType" id="RoomType" value="suite">
+                        Suit Oda (2-8 kişilik)
+                    </label>
+
+                </div>
+
+                <button id="confirmButton" class="button1">Rezervasyonu Onayla</button>
+
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

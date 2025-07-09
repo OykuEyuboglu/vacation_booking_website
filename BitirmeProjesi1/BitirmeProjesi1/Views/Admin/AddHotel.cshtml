@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "AddHotel";
+}
+
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/Hotel.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="~/css/AddFlight.css" asp-append-version="true" /> @* Add paneli aynı *@
+
+@model List<BitirmeProjesi1.DTOS.HotelCreateDTO>
+
+
+@await Html.PartialAsync("PartialMessagePopup")
+
+
+<div class="container">
+    <h2 style="font-weight:600; color:aliceblue; margin-left: 400px;">
+        Otel Ekle
+    </h2>
+    <form asp-controller="Admin" asp-action="AddHotel" method="post">
+        <div class="form-group">
+            <label for="Hotel">Otel Adı</label>
+            <input type="text" class="form-control" id="Name" name="Name" required>
+        </div>
+        <div class="form-group">
+            <label for="Location">Konum</label>
+            <input type="text" class="form-control" id="Location" name="Location" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Description">Açıklama</label>
+            <input type="text" class="form-control" id="Description" name="Description" required>
+        </div>
+        <div class="form-group">
+            <label for="MainFoto">AnaFoto URL'si'</label>
+            <input type="text" class="form-control" id="MainFotoURL" name="MainFotoURL" required>
+        </div>
+
+        <div class="rating-wrapper grid-stack form-group outline">
+
+            <div class="stars-icons-outlined"></div>
+            <div class="stars-icons-filled"></div>
+            <br />
+            <input type="range" class="stars-input form-control" id="Rating" name="Rating" min="1" max="5" value="3" step="1">
+        </div>
+
+        <button type="submit" class="btn btnEkle">Otel Ekle</button>
+    </form>
+</div>
+
+
+
+@if (Model != null)
+{
+    @foreach (var hotel in Model)
+    {
+        <div class="wrapper">
+            <h1 alt="">@hotel.Name</h1>
+            <div>
+                <img class="image" src="@hotel.MainFotoURL" alt="Image of @hotel.Name">
+            </div>
+            <div class="details">
+                <h1><em>@hotel.Description</em></h1>
+                <h2>@hotel.Location</h2>
+                <div>
+                    @hotel.Rating Yıldızlı <br />
+
+                    @for (int i = 0; i < hotel.Rating; i++)
+                    {
+                        <p style="display: inline; font-size:xx-large">★</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+    }
+
+}

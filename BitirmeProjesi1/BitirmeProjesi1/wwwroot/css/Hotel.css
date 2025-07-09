@@ -1,0 +1,216 @@
+﻿
+
+
+/* For Rating */
+
+@property --range {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 1;
+}
+
+@property --star-size {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 48px;
+}
+
+@property --range-position {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 1;
+}
+
+@property --max-rate {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 5;
+}
+
+
+
+:root {
+    --bg-svg-star-outlined: url('data:image/svg+xml, <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="%23bf9b30" d="m22 9.24-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"></path></svg>');
+    --bg-svg-star-filled: url('data:image/svg+xml, <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="%23bf9b30" d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"></path></svg>');
+}
+
+hmtl, body {
+    background-attachment: fixed !important; /* Arka plan sabitlenir */
+    background-size: cover !important;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+
+
+    /* render on top of outline */
+    .rating-wrapper {
+    position: relative;
+    z-index: 10;
+}
+
+
+/* Hotel Card*/
+
+.wrapper {
+    float: left;
+    width: 30%;
+    min-width: 300px;
+    background-color: #f1f1f1;
+    margin: 1.5%;
+    padding: 2em 1em;
+    box-sizing: border-box;
+    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+    text-align: center;
+}
+
+    .wrapper > h1 {
+        font-family: "Lato", sans-serif;
+        font-weight: 200;
+        font-size: 1.5em;
+        letter-spacing: .15em;
+        color: #333;
+    }
+
+.details {
+    width: 95%;
+    margin: 0 auto 2em;
+    padding-top: 10.5em;
+    padding-bottom: 1em;
+    background-color: #FFEBC8;
+    color: #333;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.24);
+    transition: all ease-in 0.15s;
+}
+
+.wrapper:hover .details {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 5px rgba(0,0,0,0.22);
+    transform: translate(0px, -2px) scale(1.01);
+}
+
+.details > h1 {
+    font-family: "Playfair Display";
+    font-size: 1em;
+}
+
+.details > h2 {
+    font-family: sans-serif;
+    font-size: 1.4em;
+    font-weight: 200;
+    letter-spacing: 0.1em;
+}
+
+.details > p {
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: 200;
+}
+
+.image {
+    position: relative;
+    z-index: 2;
+    width: 85%;
+    height: 250px;
+    margin: 0 auto -10em;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+    transition: all ease-in .15s;
+}
+
+.wrapper:hover .image {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transform: translate(0px, -3px) scale(1.02);
+}
+
+@media screen and (max-width: 1000px) {
+    .wrapper {
+        width: 47%;
+    }
+}
+
+@media screen and(max-width:700px) {
+    .wrapper {
+        float: none;
+        width: 70%;
+        margin: 1em auto;
+    }
+}
+
+@media screen and(max-width:700px) {
+    .wrapper {
+        float: none;
+        width: 70%;
+        margin: 1em auto;
+    }
+}
+
+
+
+
+
+.grid-stack {
+    display: grid;
+    & > *
+
+{
+    grid-area: 1 / 1;
+}
+
+}
+
+.rating-wrapper {
+    max-width: max-content;
+    overflow: auto;
+    timeline-scope: --range-timeline;
+    animation: 1s rangeKeyframes linear;
+    animation-timeline: --range-timeline;
+    animation-range: entry 100% exit 0%;
+    &:has(.stars-input:focus-within)
+
+{
+    outline-style: auto;
+    outline-color: blue;
+}
+
+}
+
+@keyframes rangeKeyframes {
+    to {
+        --range-position: 0;
+    }
+}
+
+[class^="stars-"] {
+    width: calc(var(--max-rate) * var(--star-size));
+    height: var(--star-size);
+}
+
+[class^="stars-icons"] {
+    background: var(--bg-svg-star-outlined);
+    background-size: var(--star-size);
+}
+
+.stars-icons-filled {
+    width: calc(var(--star-size) * round(up, var(--max-rate) * var(--range-position)));
+    background-image: var(--bg-svg-star-filled);
+}
+
+.stars-input {
+    cursor: pointer;
+    opacity: 0;
+    &::-webkit-slider-thumb
+
+{
+    view-timeline: --range-timeline x;
+}
+}
+

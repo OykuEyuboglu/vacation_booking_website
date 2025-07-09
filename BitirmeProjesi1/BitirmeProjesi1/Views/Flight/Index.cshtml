@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+
+<link rel="stylesheet" href="/css/flight.css">
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+@model List<BitirmeProjesi1.DTOS.FlightDTO>
+
+
+@await Html.PartialAsync("PartialMessagePopup")
+
+@if (ViewBag.WhichPage == "IndexFlightPage")
+{
+
+    <img alt="plane" class="plane" src="https://i.ibb.co/52bG3RC/landingpage-assets-0005-plane.png">
+
+}
+
+@await Html.PartialAsync("PartialFlightList")

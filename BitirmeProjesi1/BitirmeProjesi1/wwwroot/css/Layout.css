@@ -1,0 +1,318 @@
+﻿* {
+    box-sizing: border-box;
+    font-family: 'Poppins','sans-serif';
+}
+
+body {
+    background: url(/images/background.png) no-repeat, url(/images/backgroundContinue.png) repeat !important;
+    background-size: cover,cover !important;
+    background-position: center !important;
+    min-height: 100vh !important;
+    margin-top: 100px;
+}
+
+.headerPart{
+    display:flex !important;
+}
+
+.allHead {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: transparent;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+
+.logo-container {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 2rem; 
+    font-family: Arial, sans-serif;
+}
+
+.animated-logo {
+    margin-left: 5px !important; 
+    height: 50px !important;
+    width: 50px !important;
+    animation: spin 15s linear infinite !important;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+/*/---------------------------------/*/
+
+.navigation-item {
+    position: relative;
+    font-size: 1.25em !important;
+    color: #0e3d5a !important;
+    text-decoration: none;
+    font-weight: 500 !important;
+    margin-left: 40px !important;
+}
+
+.navigation-item::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 3px;
+        background: #0e3d5a;
+        border-radius: 4px;
+        transform-origin: right;
+        transform: scaleX(0);
+        transition: transform .5s;
+} 
+
+.navigation-item:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+}
+
+.navigation-item:focus {
+        color: #597b91;
+}
+
+.btnLogin-popup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #ebebebb7;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #0e3d5a;
+    font-weight: 500;
+    margin-left: 0px !important;
+    transition: .5s;
+}
+
+.btnLogin-popup:hover {
+        background-color: #e1e5f58c;
+        color: #162938;
+}
+
+.btnLogin-popup:focus {
+        background-color: #e4f0f8d7;
+}
+
+.btnLogout-size {
+    width: 150px !important;
+    margin-left:50px !important;
+}
+
+.formAll {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); /* Merkeze yerleştir, başlangıçta görünmez */
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0,0,0,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 9999; /* En önde durmasını sağlıyor */
+    transition: transform .5s ease, height .2s ease;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.formAll.active-popup {
+        transform: translate(-50%, -50%) scale(1);
+        visibility: visible;
+        opacity: 1;
+}
+
+body.popup-open {
+    overflow: hidden; /* Form açıldığında sayfanın kaydırılmasını engelle */
+}
+
+.formAll.active {
+    height: 520px;
+}
+
+.icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #162938;
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.form-box {
+    width: 100%;
+    padding: 40px;
+}
+
+
+.login-reg {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.formAll.active .login-reg {
+    transition: none;
+    transform: translateX(-400px);
+}
+
+.register {
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+}
+
+.formAll.active .register {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.formName {
+    font-size: 2em;
+    color: #162938;
+    text-align: center;
+    margin-top:50px;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #162938;
+    margin: 30px 0;
+}
+
+.inputLabel {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #162938;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.inputInput:focus ~ label,
+.inputInput:valid ~ label {
+    top: -5px;
+}
+
+.inputInput.filled ~ .inputLabel {
+    top: -5px;
+}
+/*kutucuk doluysa yazının inmesini engeller*/
+
+.inputInput {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #162938;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #162938;
+    line-height: 57px;
+}
+
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.btn:hover {
+        background-color: #919fa881;
+}
+
+.login-register {
+    font-size: .9em;
+    color: #162938 !important;
+    text-align: center;
+    font-weight: 500;
+    margin: 2px 0 10px;
+}
+
+.login-link {
+    color: #72b4db !important;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+.btn-detail {
+    border: 3px solid #a7c4d8 !important;
+    font-weight:800 !important;
+}
+
+.btn-detail:hover {
+        opacity: 75%;
+        background-color: #cdeafb !important;
+}
+.btn-detail:focus {
+        background-color:#96c5e1a6 !important;
+}
+
+.register-link {
+    color: #72b4db !important;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link:hover {
+        text-decoration: underline;
+}

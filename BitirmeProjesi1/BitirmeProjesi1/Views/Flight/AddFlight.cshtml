@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "AddFlight";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/AddFlight.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+@await Html.PartialAsync("PartialMessagePopup")
+
+
+<div class="container">
+    <h2 style="font-weight:600; color:aliceblue; margin-left: 400px;">
+        Uçuş Ekle
+    </h2>
+    <form asp-controller="Flight" asp-action="AddFlight" method="post">
+        <div class="form-group">
+            <label for="Airline">Havayolu</label>
+            <input type="text" class="form-control" id="Airline" name="Airline" required>
+        </div>
+        <div class="form-group">
+            <label for="DepartureLocation">Kalkış Yeri</label>
+            <input type="text" class="form-control" id="DepartureLocation" name="DepartureLocation" required>
+        </div>
+        <div class="form-group">
+            <label for="ArrivalLocation">Varış Yeri</label>
+            <input type="text" class="form-control" id="ArrivalLocation" name="ArrivalLocation" required>
+        </div>
+        <div class="form-group">
+            <label for="DepartureDate">Kalkış Tarihi</label>
+            <input type="datetime-local" class="form-control" id="DepartureDate" name="DepartureDate" required>
+        </div>
+        <div class="form-group">
+            <label for="ArrivalDate">Varış Tarihi</label>
+            <input type="datetime-local" class="form-control" id="ArrivalDate" name="ArrivalDate" required>
+        </div>
+        <div class="form-group">
+            <label for="Price">Fiyat</label>
+            <input type="number" class="form-control" id="Price" name="Price" required>
+        </div>
+        <div class="form-group">
+            <label for="SeatsAvailable">Mevcut Koltuk Sayısı</label>
+            <input type="number" class="form-control" id="SeatsAvailable" name="SeatsAvailable" required>
+        </div>
+        <button type="submit" class="btn btnEkle">Uçuş Ekle</button>
+    </form>
+</div>
+
+
+@await Html.PartialAsync("PartialFlightList")
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

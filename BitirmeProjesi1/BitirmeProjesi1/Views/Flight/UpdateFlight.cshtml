@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "UpdateFlight";
+}
+
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/.css" asp-append-version="true" />
+
+<link rel="stylesheet" href="~/css/AddFlight.css" asp-append-version="true" />
+
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+
+@* FLİGHT'IN GÜNCELLEME BUTONUNA BASILINCA GİRİLEN SAYFA *@
+
+@model BitirmeProjesi1.DTOS.FlightDTO
+
+@{
+    // ArrivalDate değerini datetime-local formatına dönüştür
+    var formattedDate2 = Model.ArrivalDate.ToString("yyyy-MM-ddTHH:mm");
+
+    var formattedDate = Model.DepartureDate.ToString("yyyy-MM-ddTHH:mm");
+}
+
+    <div class="container">
+        <h2 style="font-weight:600; color:aliceblue; margin-left: 400px;">
+            Uçuş Güncelle
+        </h2>
+        <form asp-controller="Flight" asp-action="UpdateFlight" method="post">
+            <div class="form-group">
+                <label for="Airline">Havayolu</label>
+                <input type="text" class="form-control" id="Airline" name="Airline" value="@Model.Airline" required>
+            </div>
+            <div class="form-group">
+                <label for="DepartureLocation">Kalkış Yeri</label>
+                <input type="text" class="form-control" id="DepartureLocation" name="DepartureLocation" value="@Model.DepartureLocation" required>
+            </div>
+            <div class="form-group">
+                <label for="ArrivalLocation">Varış Yeri</label>
+                <input type="text" class="form-control" id="ArrivalLocation" name="ArrivalLocation" value="@Model.ArrivalLocation" required>
+            </div>
+            <div class="form-group">
+                <label for="DepartureDate">Kalkış Tarihi</label>
+            <input type="datetime-local" class="form-control" id="DepartureDate" name="DepartureDate" value="@formattedDate" required>
+            </div>
+            <div class="form-group">
+                <label for="ArrivalDate">Varış Tarihi</label>
+            <input type="datetime-local" class="form-control" id="ArrivalDate" name="ArrivalDate" value="@formattedDate2" required>
+        </div>
+            <div class="form-group">
+                <label for="Price">Fiyat</label>
+                <input type="text" class="form-control" id="Price" name="Price" value="@Model.Price" required>
+            </div>
+            <div class="form-group">
+                <label for="SeatsAvailable">Mevcut Koltuk Sayısı</label>
+                <input type="number" class="form-control" id="SeatsAvailable" name="SeatsAvailable" value="@Model.SeatsAvailable" required>
+            </div>
+            <form asp-controller="Flight" asp-action="UpdateFlight" method="post">
+                <input type="hidden" name="id" value="@Model.ID" />
+                <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Güncelle</button>
+            </form>
+
+        </form>
+    </div>
+
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

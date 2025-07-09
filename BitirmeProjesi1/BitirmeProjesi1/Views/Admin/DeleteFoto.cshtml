@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "AddFoto";
+}
+
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="~/css/AddFlight.css" asp-append-version="true" /> @* Add paneli aynı *@
+
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .card-body {
+        text-align: center;
+    }
+</style>
+
+
+@model List<BitirmeProjesi1.DTOS.HotelImageDTO>
+
+@await Html.PartialAsync("PartialMessagePopup")
+
+@await Html.PartialAsync("DeleteHotel", ViewData["Hotels"])
+
+<style>
+    .flight-card__cta.button:hover {
+        background-color: crimson;
+        color: white;
+    }
+</style>
+
+
+<div class="container">
+
+    @if (Model != null)
+    {
+        <h2>Seçili Otel Fotoğrafları</h2>
+
+        if (Model.Count > 0)
+        {
+
+            <div class="row">
+                @foreach (var photo in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="@photo.ImageURL" alt="Otel Fotoğrafı">
+                            <div class="card-body">
+                                <p class="card-text">Açıklama: @photo.Caption</p>
+                            </div>
+
+                            <form asp-controller="Admin" asp-action="DeleteFotos" method="post">
+                                <input type="hidden" name="id" value="@photo.ID" />
+                                <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Sil</button>
+                            </form>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>Bu otel için herhangi bir fotoğraf bulunmamaktadır.</p>
+        }
+    }
+</div>

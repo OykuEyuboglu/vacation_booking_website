@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "UpdateHotel";
+}
+
+
+<link rel="stylesheet" href="~/css/Hotel.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/AddFlight.css" asp-append-version="true" /> @* Add paneli aynı *@
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+
+
+@* HOTEL'İN GÜNCELLEBUTONUNA BASILINCA GİRİLEN SAYFA *@
+
+@model BitirmeProjesi1.DTOS.HotelDTO
+
+
+<div class="container">
+    <h2 style="font-weight:600; color:aliceblue; margin-left: 400px;">
+        Otel Güncelle
+    </h2>
+
+    <form asp-controller="Admin" asp-action="UpdateHotel" method="post">
+        <div class="form-group">
+            <label for="Hotel">Otel Adı</label>
+            <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required>
+        </div>
+        <div class="form-group">
+            <label for="Location">Konum</label>
+            <input type="text" class="form-control" id="Location" name="Location" value="@Model.Location" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Description">Açıklama</label>
+            <input type="text" class="form-control" id="Description" name="Description" value="@Model.Description" required>
+        </div>
+
+        <div class="form-group">
+            <label for="MainFoto">AnaFoto URL'si'</label>
+            <input type="text" class="form-control" id="MainFotoURL" name="MainFotoURL" value="@Model.MainFotoURL" required>
+        </div>
+
+        <div class="rating-wrapper grid-stack form-group outline">
+            <div>
+                <label for="Description">Derecelendirme</label>
+                <input type="text" class="form-control" id="Rating" name="Rating" value="@Model.Rating" required>
+                 <br />
+
+                @for (int i = 0; i < Model.Rating; i++)
+                {
+                    <p style="display: inline; font-size:xx-large">★</p>
+                }
+                <p style="display:inline">Yıldızlı</p>
+            </div>
+
+        </div>
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit" class="flight-card__cta button" style="padding-left:50px; padding-right:50px">Otel Güncelle</button>
+    </form>
+</div>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

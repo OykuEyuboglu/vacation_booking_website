@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "AddFoto";
+}
+
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="~/css/AddFlight.css" asp-append-version="true" /> @* Add paneli aynı *@
+
+@model BitirmeProjesi1.DTOS.HotelImageDTO
+
+@await Html.PartialAsync("PartialMessagePopup")
+
+<div class="container">
+    <h2 style="font-weight:600; color:aliceblue; margin-left: 400px;">
+        Otel İçin Fotoğraf Ekle
+    </h2>
+
+    <form asp-controller="Admin" asp-action="AddFotoPost" method="post">
+        <div class="form-group">
+            <label for="ImageURL">Fotoğraf URLsi</label>
+            <input type="text" class="form-control" id="ImageURL" name="ImageURL" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Caption">Bilgi Metni</label>
+            <input type="text" class="form-control" id="Caption" name="Caption" required>
+        </div>
+
+        <div class="form-group">
+            <label for="hotelId">Otel ID</label>
+            <input type="text" class="form-control" id="hotelId" name="hotelId" required>
+        </div>
+
+        <button type="submit" class="btn btnEkle" style="border-color: cadetblue">
+            Fotoğraf Ekle
+        </button>
+    </form>
+</div>
