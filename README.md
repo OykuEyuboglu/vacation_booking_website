@@ -60,7 +60,7 @@ VacationBooking/
 ### 1. Configure Database
 
 - Update the connection string in `appsettings.json`:
-```json
+
 "ConnectionStrings": {
   "Default": "Server=(localdb)\\mssqllocaldb;Database=VacationBookingDB;Trusted_Connection=True;"
 }
