@@ -74,29 +74,32 @@ Update-Database
 - Run the application
 - Navigate to: https://localhost:5001/
 
+---
+
 ## 🔍 Use Cases
 Below are the key scenarios and user flows supported by the Vacation Booking Website:
 
-📝 User Registration & Login
+- 📝 User Registration & Login
 Visitors can sign up with their credentials and log in to access personalized features such as booking history and saved vacation packages.
 
-📆 Booking a Vacation
+- 📆 Booking a Vacation
 Users can browse available hotels, flights, and tours; select preferred dates and number of guests; and complete the booking process.
 
-🧑‍💼 Admin Management Panel
+- 🧑‍💼 Admin Management Panel
 Administrators can manage platform content by adding, updating, or removing hotels, flights, vacation packages, and other related entities through a secure admin interface.
 
-🔎 Browsing & Filtering
+- 🔎 Browsing & Filtering
 Users can filter vacation options based on location, type (hotel, flight, tour), availability, or price, making it easier to find the perfect getaway.
+
+---
 
 ## ✅ Core Concepts Used
 
-✅ MVC Pattern: Clear separation between Models, Views, Controllers
-📦 DTOs: Used for clean, secure communication between layers
-🔁 AutoMapper: Handles data mapping between Entities and DTOs
-🗃️ Generic Repository: Abstraction over data access logic
-💼 Unit of Work: Manages transactions
-✅ Form Validation: Using [DataAnnotations] in ViewModels
-🔒 Simple Authentication: Role or claim-based access possible
-💉 Dependency Injection: Handled via Program.cs
-
+- ✅ MVC Pattern: Clear separation between Models, Views, Controllers
+- 📦 DTOs: Used for clean, secure communication between layers
+- 🔁 AutoMapper: Handles data mapping between Entities and DTOs
+- 🗃️ Generic Repository: Abstraction over data access logic
+- 💼 Unit of Work: Manages transactions
+- ✅ Form Validation: Using [DataAnnotations] in ViewModels
+- 🔒 Simple Authentication: Role or claim-based access possible
+- 💉 Dependency Injection: Handled via Program.cs
