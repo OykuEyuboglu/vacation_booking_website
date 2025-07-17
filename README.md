@@ -74,8 +74,6 @@ Update-Database
 - Run the application
 - Navigate to: https://localhost:5001/
 
---
-
 ## 🔍 Use Cases
 Below are the key scenarios and user flows supported by the Vacation Booking Website:
 
@@ -90,8 +88,6 @@ Administrators can manage platform content by adding, updating, or removing hote
 
 🔎 Browsing & Filtering
 Users can filter vacation options based on location, type (hotel, flight, tour), availability, or price, making it easier to find the perfect getaway.
-
---
 
 ## ✅ Core Concepts Used
 
