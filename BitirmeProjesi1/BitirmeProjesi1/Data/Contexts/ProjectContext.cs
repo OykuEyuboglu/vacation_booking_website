@@ -16,7 +16,7 @@ namespace BitirmeProjesi1.Data.Context
         public DbSet<Room> Rooms { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=LAPTOP-BCGODK3K;Database=TatilSitesi;Trusted_Connection=true;TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer("Server=your_server;Database=TatilSitesi;Trusted_Connection=true;TrustServerCertificate=true");
 
             base.OnConfiguring(optionsBuilder);
         }
