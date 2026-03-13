@@ -1,105 +1,272 @@
 # 🏖️ Vacation Booking Website
 
-**Vacation Booking Website** is a full-stack ASP.NET Core MVC application designed for managing and booking holiday packages.  
-It follows a layered architecture with support for DTOs, dependency injection, repository & service patterns, and SQL Server database integration.
+<div align="center">
+
+![Vacation App](https://cdn-icons-png.flaticon.com/512/201/201623.png)
+
+*A full-stack holiday booking platform built with ASP.NET Core MVC.*
+
+[![ASP.NET](https://img.shields.io/badge/ASP.NET%20Core-5C2D91?style=for-the-badge&logo=dotnet&logoColor=white)]()
+[![Entity Framework](https://img.shields.io/badge/Entity%20Framework-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)]()
+[![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)]()
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)]()
+
+</div>
 
 ---
 
-## 🌟 Key Features
+# 🌟 Project Overview
 
-- 🏡 **Holiday Package Listings**: Browse available accommodations, flights, and tour activities
-- 📅 **Reservation System**: Choose travel dates, guests, and submit bookings
-- 👤 **User Management**: Register, login, update profile
-- 🧑‍💼 **Admin Panel**: Create, update, or delete packages and tour activities
-- 📦 **DTO Abstraction**: Secure and clean data transfer between layers
-- 📚 **Service & Repository Pattern**: Separate business logic from data access
+**Vacation Booking Website** is a **full-stack ASP.NET Core MVC web application** designed for managing and booking holiday packages.
 
----
+The platform allows users to browse **hotels, flights, and tours**, make reservations, and manage bookings.  
+It follows a **layered architecture** with DTO abstraction and uses **Entity Framework Core** with **SQL Server**.
 
-## 🚀 Tech Stack
+This project was developed as the **final graduation project** of the:
 
-### 🎯 Frontend & Architecture
-- **ASP.NET Core MVC** (.NET 8+)
-- **Razor Views** with **Bootstrap 4/5**
+🎓 **BilgeAdam Akademi – Fullstack Web Development with .NET Program**
 
-### 🛠 Backend
-- **Entity Framework Core** (Code-First)
-- **Repository Pattern**
-- **Service Layer with Dependency Injection**
+The project demonstrates modern backend development practices such as:
 
-### 🗄 Database
-- **SQL Server** (LocalDB / Azure / Docker-compatible)
-
-### 📦 Abstractions
-- **DTOs** (e.g., `UserDto`, `HotelDto`, `BookingDto`)
-- **AutoMapper** for Entity ↔ DTO mapping
+- Repository Pattern
+- Service Layer Architecture
+- DTO abstraction
+- Dependency Injection
+- Entity Framework Core
 
 ---
 
-## 📁 Project Structure
+# 🎥 Demo Video
 
-VacationBooking/
-├── VacationBooking.UI # MVC UI project
-│ ├── Controllers/
-│ ├── Views/
-│ └── ViewModels/
-├── VacationBooking.Business # Service layer
-│ └── Services/
-├── VacationBooking.DataAccess # Repository + EF DbContext
-│ ├── Entities/
-│ ├── Repositories/
-│ └── AppDbContext.cs
-├── VacationBooking.Common # DTOs, AutoMapper Profiles
-│ └── Dtos/
-└── VacationBooking.Tests # Unit/Integration tests
+[![Watch the demo](https://img.youtube.com/vi/O5BL-8hjChw/0.jpg)](https://youtu.be/O5BL-8hjChw)
+
+> Click the thumbnail above to watch the full project demo.
 
 ---
 
-## ⚙️ Getting Started
+# 🚀 Features
 
-### 1. Configure Database
+## 🏡 Vacation Package Listings
+Users can browse available:
 
-- Update the connection string in `appsettings.json`:
+- Hotels
+- Flights
+- Tour activities
 
+Each listing includes detailed information such as location, price, and availability.
+
+---
+
+## 📅 Reservation System
+
+Users can:
+
+- Select travel dates
+- Choose number of guests
+- Complete booking reservations
+
+All reservations are stored securely in the database.
+
+---
+
+## 👤 User Management
+
+- User registration
+- Login system
+- Profile management
+- Booking history tracking
+
+---
+
+## 🧑‍💼 Admin Panel
+
+Administrators can:
+
+- Add new hotels or tours
+- Update package information
+- Delete outdated listings
+- Manage platform content
+
+---
+
+## 📦 DTO Abstraction
+
+The application uses **Data Transfer Objects (DTOs)** to ensure:
+
+- Secure data flow
+- Clean separation between layers
+- Better maintainability
+
+Examples:
+
+```
+UserDto
+HotelDto
+BookingDto
+FlightDto
+```
+
+---
+
+# 🧱 Technology Stack
+
+## 🎯 Frontend
+
+```
+ASP.NET Core MVC
+Razor Views
+HTML / CSS
+Bootstrap
+```
+
+---
+
+## 🛠 Backend
+
+```
+ASP.NET Core (.NET 8)
+Entity Framework Core
+Repository Pattern
+Service Layer Architecture
+Dependency Injection
+AutoMapper
+```
+
+---
+
+## 🗄 Database
+
+```
+Microsoft SQL Server
+Code-First Approach
+Entity Framework Migrations
+```
+
+---
+
+# 🧩 Project Architecture
+
+```
+VacationBooking
+│
+├── VacationBooking.UI
+│     ├── Controllers
+│     ├── Views
+│     └── ViewModels
+│
+├── VacationBooking.Business
+│     └── Services
+│
+├── VacationBooking.DataAccess
+│     ├── Entities
+│     ├── Repositories
+│     └── AppDbContext.cs
+│
+├── VacationBooking.Common
+│     └── DTOs
+│
+└── VacationBooking.Tests
+```
+
+---
+
+# 🔄 Application Workflow
+
+1️⃣ User visits the website  
+2️⃣ The MVC controller processes requests  
+3️⃣ Business services handle application logic  
+4️⃣ Repository layer communicates with the database  
+5️⃣ Data is returned to the UI via DTOs
+
+---
+
+# ⚙️ Installation & Setup
+
+## 📌 Requirements
+
+Make sure the following tools are installed:
+
+- .NET 8 SDK
+- SQL Server
+- Visual Studio or VS Code
+- Entity Framework Core Tools
+
+---
+
+# 🔧 Configure Database
+
+Update your **connection string** inside `appsettings.json`.
+
+Example:
+
+```json
 "ConnectionStrings": {
   "Default": "Server=(localdb)\\mssqllocaldb;Database=VacationBookingDB;Trusted_Connection=True;"
 }
+```
 
-- Then, apply migrations:
+Then apply migrations:
+
+```
 Update-Database
-
-### 2. Run the Application
-
-- Open VacationBooking.UI in Visual Studio or VS Code
-- Run the application
-- Navigate to: https://localhost:5001/
+```
 
 ---
 
-## 🔍 Use Cases
-Below are the key scenarios and user flows supported by the Vacation Booking Website:
+# 🚀 Run the Application
 
-- 📝 User Registration & Login
-Visitors can sign up with their credentials and log in to access personalized features such as booking history and saved vacation packages.
+1️⃣ Clone the repository
 
-- 📆 Booking a Vacation
-Users can browse available hotels, flights, and tours; select preferred dates and number of guests; and complete the booking process.
+```
+git clone https://github.com/OykuEyuboglu/vacation_booking_website.git
+```
 
-- 🧑‍💼 Admin Management Panel
-Administrators can manage platform content by adding, updating, or removing hotels, flights, vacation packages, and other related entities through a secure admin interface.
+2️⃣ Open the project
 
-- 🔎 Browsing & Filtering
-Users can filter vacation options based on location, type (hotel, flight, tour), availability, or price, making it easier to find the perfect getaway.
+Open **VacationBooking.UI** in Visual Studio.
+
+3️⃣ Run the application
+
+```
+https://localhost:5001
+```
 
 ---
 
-## ✅ Core Concepts Used
+# 📚 Concepts Demonstrated
 
-- ✅ MVC Pattern: Clear separation between Models, Views, Controllers
-- 📦 DTOs: Used for clean, secure communication between layers
-- 🔁 AutoMapper: Handles data mapping between Entities and DTOs
-- 🗃️ Generic Repository: Abstraction over data access logic
-- 💼 Unit of Work: Manages transactions
-- ✅ Form Validation: Using [DataAnnotations] in ViewModels
-- 🔒 Simple Authentication: Role or claim-based access possible
-- 💉 Dependency Injection: Handled via Program.cs
+This project demonstrates several important software engineering concepts:
+
+- MVC Pattern (Model–View–Controller)
+- DTO architecture
+- AutoMapper usage
+- Repository Pattern
+- Service Layer pattern
+- Dependency Injection
+- Entity Framework Core
+- SQL Server integration
+
+---
+
+# 🎓 Education Context
+
+This project was developed as part of:
+
+**BilgeAdam Akademi  
+Fullstack Web Development with .NET Training Program**
+
+Topics covered during the training included:
+
+- ASP.NET Core MVC
+- C# Programming
+- Entity Framework Core
+- SQL Server
+- RESTful architecture
+- Dependency Injection
+- Clean architecture principles
+
+---
+
+# 👩‍💻 Author
+
+**Dila Öykü Eyüboğlu**  
